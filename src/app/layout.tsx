@@ -16,6 +16,17 @@ const notoSerif = Noto_Serif({
   variable: '--font-noto-serif'
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: 'no',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -23,6 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${notoSerif.variable}`}>
+      <head>
+        <meta name="viewport" content={viewport.toString()} />
+      </head>
       <body className="">
         <Title />
         <SidebarLayout>

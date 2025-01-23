@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Contact() {
   return (
@@ -12,10 +13,12 @@ export default function Contact() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <img 
+              <Image 
                 src="/myface.svg" 
                 alt="Nicholas Chairnando" 
                 className="w-full max-w-[320px] h-auto mx-auto mb-6 object-cover"
+                width={320}
+                height={320}
               />
             </motion.div>
 

@@ -1,6 +1,12 @@
 "use client";
 import { motion, useMotionValue} from "framer-motion";
 import { useState } from "react";
+import { generateViewport } from 'your-library'
+
+const ViewportComponent = () => {
+  // Your viewport generation logic here
+  return <div>{/* ... */}</div>
+}
 
 const Home = () => {
   const cursorX = useMotionValue(-100);
@@ -152,4 +158,11 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default function Page() {
+  return (
+    <div>
+      <ViewportComponent />
+      <Home />
+    </div>
+  )
+}

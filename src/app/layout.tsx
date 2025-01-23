@@ -3,6 +3,7 @@ import './globals.css';
 import { Outfit, Noto_Serif } from 'next/font/google';
 import Title from "./components/Title";
 
+
 // Initialize the fonts
 const outfit = Outfit({
   subsets: ['latin'],
@@ -16,17 +17,6 @@ const notoSerif = Noto_Serif({
   variable: '--font-noto-serif'
 });
 
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: 'no',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -34,8 +24,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${notoSerif.variable}`}>
+      {/* WRITTEN BY: Nicholas Chairnando 
+          EMAIL: nchairna@uci.edu
+      */}
       <head>
-        <meta name="viewport" content={viewport.toString()} />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Nicholas Chairnando" />
       </head>
       <body className="">
         <Title />

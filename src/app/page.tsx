@@ -1,7 +1,7 @@
 "use client";
 import { motion, useMotionValue} from "framer-motion";
 import { useState } from "react";
-import { generateViewport } from 'your-library'
+// import { generateViewport } from 'your-library'
 
 const ViewportComponent = () => {
   // Your viewport generation logic here
@@ -31,7 +31,7 @@ const Home = () => {
         }}
       >
         <div className="bg-white font-bold text-black px-4 py-2 rounded-full -translate-x-1/2 -translate-y-1/2">
-          Chai's {hoverText} Guide
+          Chai&apos;s {hoverText} Guide
         </div>
       </motion.div>
 

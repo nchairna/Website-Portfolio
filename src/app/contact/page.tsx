@@ -52,13 +52,28 @@ export default function Contact() {
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
               >
                 <a href="https://www.linkedin.com/in/nicholas-chairnando/" target="_blank" rel="noopener noreferrer">
-                  <img src="/linkedin.svg" alt="LinkedIn" className="w-8 h-8" />
+                  <Image 
+                    src="/linkedin.svg" 
+                    alt="LinkedIn"
+                    width={24}
+                    height={24}
+                  />
                 </a>
                 <a href="https://github.com/nchairna" target="_blank" rel="noopener noreferrer">
-                  <img src="/githubs.svg" alt="GitHub" className="w-8 h-8" />
+                  <Image 
+                    src="/githubs.svg" 
+                    alt="GitHub"
+                    width={24}
+                    height={24}
+                  />
                 </a>
                 <a href="https://www.instagram.com/archaiived/" target="_blank" rel="noopener noreferrer">
-                  <img src="/instasvg.svg" alt="Instagram" className="w-8 h-8" />
+                  <Image 
+                    src="/instasvg.svg" 
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                  />
                 </a>
               </motion.div>
             </div>

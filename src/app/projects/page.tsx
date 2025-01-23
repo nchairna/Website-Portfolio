@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useMotionValue } from 'framer-motion'
+import { motion} from 'framer-motion'
 import { useState } from 'react'
 
 
@@ -30,9 +30,14 @@ const projects: Project[] = [
 
 ]
 
-const ProjectCard = ({ project }: { project: Project }) => {
+const ProjectCard = ({ project, onMouseEnter, onMouseLeave }: { project: Project; onMouseEnter: () => void; onMouseLeave: () => void }) => {
   return (
-    <Link href={`/projects/${project.slug}`} className="group block w-10/12">
+    <Link 
+      href={`/projects/${project.slug}`} 
+      className="group block w-10/12"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <motion.div 
         className="relative aspect-video rounded-xl overflow-hidden border-opacity-0"
         initial={{ opacity: 0, y: 20 }}
@@ -60,43 +65,48 @@ const ProjectCard = ({ project }: { project: Project }) => {
 }
 
 export default function ProjectsPage() {
-  const cursorX = useMotionValue(-100)
-  const cursorY = useMotionValue(-100)
-  const [showCursor, setShowCursor] = useState(false)
-  const [hoveredProject, setHoveredProject] = useState<Project | null>(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showCursor, setShowCursor] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
 
-  const handleMouseMove = (event: React.MouseEvent) => {
-    const rect = event.currentTarget.getBoundingClientRect()
-    cursorX.set(event.clientX - rect.left)
-    cursorY.set(event.clientY - rect.top)
-  }
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePosition({ x: e.clientX, y: e.clientY });
+  };
 
   return (
     <div 
-      className="min-h-screen p-8"
+      className="min-h-screen p-8 relative"
       onMouseMove={handleMouseMove}
     >
       {/* Custom Cursor */}
-      <motion.div
-        className="fixed pointer-events-none z-50"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          display: showCursor ? 'block' : 'none'
-        }}
-      >
-        <div className="bg-black text-white px-4 py-2 rounded-full -translate-x-1/2 -translate-y-1/2">
-          View {hoveredProject?.name}
-        </div>
-      </motion.div>
+      {showCursor && hoveredProject && (
+        <motion.div
+          className="fixed pointer-events-none z-50 bg-white text-black p-4 rounded-lg"
+          animate={{
+            x: mousePosition.x + 20,
+            y: mousePosition.y + 20,
+          }}
+          transition={{ duration: 0, ease: "linear" }}
+        >
+          <p className="text-sm font-medium">{hoveredProject.name}</p>
+          <p className="text-xs opacity-75">View Project →</p>
+        </motion.div>
+      )}
 
-      {/* Projects Grid */}
       <div className={`max-w-6xl mx-auto ${showCursor ? 'cursor-none' : ''}`}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <ProjectCard
               key={project.slug}
               project={project}
+              onMouseEnter={() => {
+                setShowCursor(true);
+                setHoveredProject(project);
+              }}
+              onMouseLeave={() => {
+                setShowCursor(false);
+                setHoveredProject(null);
+              }}
             />
           ))}
         </div>

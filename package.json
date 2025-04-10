@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "@react-three/drei": "^10.0.5",
+    "@react-three/fiber": "^8.2.2",
     "cursor-effects": "github:tholman/cursor-effects",
     "framer-motion": "^11.18.2",
+    "framer-motion-3d": "^12.4.13",
     "lucide-react": "^0.473.0",
     "next": "^15.1.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.175.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Tab } from '@headlessui/react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -37,24 +37,39 @@ const TimelineItem = ({ children, index }: { children: React.ReactNode, index: n
 
 export default function ResumePage() {
   const [selectedTab, setSelectedTab] = useState(0);
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const [showCursor, setShowCursor] = useState(false);
+  const [hoverText, setHoverText] = useState("");
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    cursorX.set(event.clientX + scrollX - rect.left);
+    cursorY.set(event.clientY + scrollY - rect.top);
+  };
 
   const education = [
     {
       school: "UCI",
-      degree: "B.S Computer Science",
+      location: "Irvine, CA",
+      degree: "B.S Computer Science, Emphasis in Intelligent Systems",
       year: "2023 - 2025",
       description: "Brief description of your studies and achievements"
     },
     {
       school: "De Anza College",
+      location: "Cupertino, CA",
       degree: "Transfer in Computer Science",
       year: "2021 - 2023",
       description: "Brief description of your studies and achievements"
     },
     {
-      school: "Bina Bangsa Highschool",
-      degree: "Your Degree",
-      year: "20XX - 20XX",
+      school: "BBS Highschool",
+      location: "Jakarta, Indonesia",
+      degree: "IGCSE",
+      year: "2016 - 2020",
       description: "Brief description of your studies and achievements"
     },
     // Add more education entries as needed
@@ -62,37 +77,85 @@ export default function ResumePage() {
 
   const work = [
     {
-      company: "Company Name",
-      position: "Your Position",
-      period: "20XX - Present",
-  
+      company: "Antariksa Audio",
+      position: "Product Developer",
+      period: "August 2023 - Present",
+      location: "Jakarta, Indonesia"
     },
     {
-      company: "Company Name",
-      position: "Your Position",
-      period: "20XX - Present",
-    
+      company: "TelandC",
+      position: "Web & Development Intern",
+      period: "June 2023 - September 2023",
+      location: "Jakarta, Indonesia"
     },
-    // 
-    // Add more work entries as needed
+    {
+      company: "HerbyHertape",
+      position: "Web Developer",
+      period: "June 2023 - August 2023",
+      location: "Jakarta, Indonesia"
+    }
   ];
 
   const skills = [
     {
-      category: "Programming Languages",
-      items: ["JavaScript", "TypeScript", "Python", "etc."]
+      category: "Technical Skills",
+      items: [
+        {
+          name: "JavaScript",
+          logo: "/logo-javascript.svg",
+        },
+        {
+          name: "TypeScript",
+          logo: "/typescript.svg",
+        },
+        {
+          name: "Python",
+          logo: "/python-5.svg",
+        },
+        {
+          name: "C++",
+          logo: "/c.svg",
+        },
+        {
+          name: "React",
+          logo: "react-2.svg",
+        },
+        {
+          name: "Next.js",
+          logo: "/next-js.svg",
+        },
+        {
+          name: "HTML",
+          logo: "/html-1.svg",
+        },
+        {
+          name: "CSS",
+          logo: "/css-3.svg",
+        },
+        {
+          name: "Figma",
+          logo: "/figma-icon.svg",
+        },
+      
+      ],
     },
-    {
-      category: "Frameworks & Libraries",
-      items: ["React", "Next.js", "Node.js", "etc."]
-    },
-    // Add more skill categories as needed
   ];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center text-white">My Professional Journey</h1>
-      
+      <motion.div
+        className="absolute pointer-events-none z-50"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          display: showCursor ? 'block' : 'none'
+        }}
+      >
+        <div className="bg-white font-bold text-black px-4 py-2 rounded-full -translate-x-1/2 -translate-y-1/2">
+          {hoverText}
+        </div>
+      </motion.div>
+
       <Tab.Group selectedIndex={selectedTab} onChange={setSelectedTab}>
         <Tab.List className="flex space-x-1 rounded-xl bg-white/10 bg-opacity-100 p-1">
           {['Education', 'Work', 'Skills'].map((category) => (
@@ -119,10 +182,12 @@ export default function ResumePage() {
             {education.map((edu, index) => (
               <TimelineItem key={index} index={index}>
                 <div className="ml-8 bg-white/10 p-6 rounded-lg backdrop-blur-sm text-white">
-                  <h3 className="text-xl font-bold">{edu.school}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold">{edu.school}</h3>
+                    <span className="text-sm ml-2 text-white/60">{edu.location}</span>
+                  </div>
                   <p className="text-white/80">{edu.degree}</p>
                   <p className="text-white">{edu.year}</p>
-                 
                 </div>
               </TimelineItem>
             ))}
@@ -133,10 +198,12 @@ export default function ResumePage() {
             {work.map((job, index) => (
               <TimelineItem key={index} index={index}>
                 <div className="ml-8 bg-white/10 p-6 rounded-lg backdrop-blur-sm text-white">
-                  <h3 className="text-xl font-bold">{job.company}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold">{job.company}</h3>
+                    <span className="text-sm ml-2 text-white/60">{job.location}</span>
+                  </div>
                   <p className="text-white/80">{job.position}</p>
                   <p className="text-white/60">{job.period}</p>
-                 
                 </div>
               </TimelineItem>
             ))}
@@ -149,18 +216,45 @@ export default function ResumePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-white/10 p-6 rounded-lg backdrop-blur-sm text-white"
+                className={`p-6 rounded-lg text-white min-h-[400px] relative overflow-hidden ${showCursor ? 'cursor-none' : ''}`}
+                onMouseMove={handleMouseMove}
               >
-                <h3 className="text-xl font-bold mb-4">{category.category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.items.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="bg-white/20 text-white px-3 py-1 rounded-full text-sm"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                <h3 className="text-xl font-bold mb-4 text-center">{category.category}</h3>
+                <div className="flex flex-wrap gap-6 justify-center items-center">
+                  {category.items.map((skill, skillIndex) => {
+                    const sizeClasses = { bubble: 'w-32 h-32', icon: 'w-16 h-16' };
+                    return (
+                      <motion.div
+                        key={skillIndex}
+                        className="relative -mx-2"
+                        initial={{ y: 0, scale: 1 }}
+                        animate={{ x: 0, y: 0 }}
+                        whileHover={{ 
+                          scale: 1.1,
+                          transition: { type: "spring", damping: 10, stiffness: 100 }
+                        }}
+                        onMouseEnter={() => {
+                          setShowCursor(true);
+                          setHoverText(skill.name);
+                        }}
+                        onMouseLeave={() => {
+                          setShowCursor(false);
+                          setHoverText("");
+                        }}
+                      >
+                        <div
+                          className={`${sizeClasses.bubble} rounded-2xl bg-white/10 backdrop-blur-sm 
+                                    flex items-center justify-center transition-all duration-300 relative`}
+                        >
+                          <img
+                            src={skill.logo}
+                            alt={skill.name}
+                            className={`${sizeClasses.icon} object-contain`}
+                          />
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </motion.div>
             ))}

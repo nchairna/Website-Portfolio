@@ -1,10 +1,116 @@
 "use client";
+<<<<<<< HEAD
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
 // import { generateViewport } from 'your-library'
 
+=======
+import { motion, useMotionValue, useAnimate, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import { Tab } from '@headlessui/react';
+import { Roboto_Mono } from 'next/font/google';
+// import { generateViewport } from 'your-library'
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const TypewriterText = ({ text, delay = 0 }) => {
+  return (
+    <motion.p
+      initial={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
+      animate={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
+      transition={{
+        duration: 0.9,
+        delay: delay,
+        ease: "steps(20)",
+        opacity: {
+          duration: 0.1
+        }
+      }}
+    >
+      {text}
+    </motion.p>
+  );
+};
+
+
+const RandomLoadingText = ({ finalPercentage, delay = 0 }) => {
+  const [text, setText] = useState("0%");
+  
+  useEffect(() => {
+    const generateRandomChars = () => {
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    };
+
+    let percentage = 0;
+    const interval = setInterval(() => {
+      percentage += 1;
+      if (percentage <= finalPercentage) {
+        setText(`${percentage}% ${generateRandomChars()}`);
+      } else {
+        clearInterval(interval);
+      }
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [finalPercentage]);
+
+  return <TypewriterText text={text} delay={delay} />;
+};
+
+const LoadingStatus = () => {
+  const [status, setStatus] = useState("GUIDES LOADING...");
+  const [randomChars, setRandomChars] = useState("");
+  
+  useEffect(() => {
+    const statusSequence = [
+      "GUIDES LOADING...",
+      "DESIGN LOADING...",
+      "ABOUT LOADING...",
+      "CONTACT LOADING...",
+      <><span className="text-emerald-400">[STATUS]</span> COMPLETE 100%</>
+    ];
+    
+    const generateRandomChars = () => {
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    };
+
+    const randomInterval = setInterval(() => {
+      setRandomChars(generateRandomChars());
+    }, 50);
+
+    let currentIndex = 0;
+    const statusInterval = setInterval(() => {
+      currentIndex++;
+      if (currentIndex < statusSequence.length) {
+        setStatus(statusSequence[currentIndex]);
+      } else {
+        clearInterval(statusInterval);
+        clearInterval(randomInterval);
+      }
+    }, 800);
+
+    return () => {
+      clearInterval(statusInterval);
+      clearInterval(randomInterval);
+    };
+  }, []);
+
+  return (
+    <TypewriterText 
+      text={<>
+        {status} <span className="text-white/30">{randomChars}</span>
+      </>} 
+      delay={0.5}
+    />
+  );
+};
+>>>>>>> b8316ed3b89389b522a95e9ef63a88d061d5287c
 
 
 
@@ -15,7 +121,12 @@ const Home = () => {
   const [showCursor, setShowCursor] = useState(false);
   const [hoverText, setHoverText] = useState("");
   const [showArrow, setShowArrow] = useState(true);
+<<<<<<< HEAD
  
+=======
+  const [currentTime, setCurrentTime] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
+>>>>>>> b8316ed3b89389b522a95e9ef63a88d061d5287c
 
   const cursorSize = 20; // Size of the default circle cursor
 
@@ -41,7 +152,39 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+<<<<<<< HEAD
  
+=======
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      
+      // Format time and date for Irvine (Pacific Time)
+      const timeFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+      
+      const dateFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric'
+      });
+
+      setCurrentTime(timeFormatter.format(now));
+      setCurrentDate(dateFormatter.format(now));
+    };
+
+    // Update immediately and then every second
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+>>>>>>> b8316ed3b89389b522a95e9ef63a88d061d5287c
 
   const handleGuideNavigation = (guide: string) => {
     router.push(`/guides/${guide.toLowerCase()}`);
@@ -469,7 +612,11 @@ const ProjectList = () => {
           'Indorder',
           'Agung Graha',
           'SmartBin'
+<<<<<<< HEAD
         ].map((project) => (
+=======
+        ].map((project, index) => (
+>>>>>>> b8316ed3b89389b522a95e9ef63a88d061d5287c
           <div 
             key={project}
             className="group border-t border-white/20 relative origin-top cursor-none"
@@ -506,9 +653,19 @@ const ProjectList = () => {
   );
 };
 
+<<<<<<< HEAD
 export default function Page() {
   return (
     <main className="min-h-screen cursor-none">
+=======
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
+export default function Page() {
+  return (
+    <main className="min-h-screen bg-black text-white">
+>>>>>>> b8316ed3b89389b522a95e9ef63a88d061d5287c
       <Navbar />
     
       <Home />

@@ -27,17 +27,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-<<<<<<< HEAD
     <html lang="en" className={`${outfit.variable} ${notoSerif.variable}`}>
       <body>
        
           {children}
       
       </body>
-=======
-    <html lang="en">
-      <body>{children}</body>
->>>>>>> b8316ed3b89389b522a95e9ef63a88d061d5287c
     </html>
   )
 }

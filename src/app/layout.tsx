@@ -1,4 +1,3 @@
-
 import './globals.css';
 import { Outfit, Noto_Serif } from 'next/font/google';
 
@@ -28,10 +27,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${notoSerif.variable}`}>
-      <body>
-       
-          {children}
-      
+      <body suppressHydrationWarning={true}>
+        {children}
       </body>
     </html>
   )

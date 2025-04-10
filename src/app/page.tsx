@@ -130,7 +130,7 @@ const Home = () => {
     
         
 
-      <div className="pt-22 pb-0 mb-0">
+      <div className="mt-6 pb-0 mb-0">
         <h2 className="text-6xl font-bold text-white mb-2 max-w-7xl mx-auto px-4 md:px-8">Guides</h2>
       </div>
 

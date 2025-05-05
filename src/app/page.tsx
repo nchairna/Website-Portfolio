@@ -5,9 +5,27 @@ import { useRouter } from 'next/navigation';
 
 // import { generateViewport } from 'your-library'
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
 
-
-
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
 
 const Home = () => {
   const router = useRouter();
@@ -72,7 +90,7 @@ const Home = () => {
         className="fixed pointer-events-none z-50"
         animate={{
           x: mousePosition.x - 80,
-          y: mousePosition.y - 20,
+          y: mousePosition.y - 90,
           scale: showCursor ? 1 : 0,
           opacity: showCursor ? 1 : 0,
         }}
@@ -123,24 +141,49 @@ const Home = () => {
         </svg>
       </motion.div>
 
-      <div className="relative min-h-screen pt-28">
-
-          
-
     
-        
-
-      <div className="mt-6 pb-0 mb-0">
-        <h2 className="text-6xl font-bold text-white mb-2 max-w-7xl mx-auto px-4 md:px-8">Guides</h2>
-      </div>
-
-        <div 
-          className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3  gap-16 md:gap-2 items-center justify-items-center relative max-w-7xl mx-auto px-4 md:px-8 ${showCursor ? 'cursor-none' : ''}`}
+      {/* Existing Guides Section */}
+      <div className="relative">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          className="mt-4 pb-0 mb-0"
         >
-          <div className="relative">
+          <svg viewBox="0 0 500 100" className="w-full h-48 mt-18 mb-3">
+            <path
+              id="curve"
+              d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"
+              fill="transparent"
+            />
+            <text className="fill-white" style={{ fontFamily: 'Gambarino' }}>
+              <textPath href="#curve" startOffset="50%" textAnchor="middle" className="text-3xl md:text-3xl lg:text-3xl">
+                Chai&apos;s Portfolio
+              </textPath>
+            </text>
+          </svg>
+        </motion.div>
+
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-16 md:gap-2 items-center justify-items-center relative max-w-7xl mx-auto px-4 md:px-8 -mt-16 cursor-none ${showCursor ? 'cursor-none' : ''}`}
+        >
+          <motion.div variants={fadeInUp} className="relative">
             <motion.button
               className="border-none bg-transparent p-0 cursor-none"
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ 
+                scale: 1.1,
+                rotate: 10,
+                transition: {
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 10
+                }
+              }}
               onClick={() => handleGuideNavigation('coffee')}
               onMouseEnter={() => {
                 setShowCursor(true);
@@ -163,19 +206,26 @@ const Home = () => {
                   }}
                 />
             </motion.button>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col items-center justify-center mt-4 md:mt-0">
+          <motion.div variants={fadeInUp} className="flex flex-col items-center justify-center mt-4 md:mt-0">
             <motion.button
               className="border-none bg-transparent p-0 cursor-none"
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ 
+                scale: 1.1,
+                rotate: -10,
+                transition: {
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 10
+                }
+              }}
               onClick={() => handleGuideNavigation('food')}
               onMouseEnter={() => {
                 setShowCursor(true);
                 setHoverText("Food");
               }}
               onMouseLeave={() => {
-                
                 setShowCursor(false);
                 setHoverText("");
               }}
@@ -183,7 +233,7 @@ const Home = () => {
               <motion.img
                 src="/panwebp.webp"
                 alt="Pan"
-                className="sm:pt-0 w-58 h-56 lg:w-[max] lg:h-72 object-contain"
+                className="sm:pt-0 w-80 h-64 lg:w-[max] lg:h-72 object-contain"
          
         
                   transition={{
@@ -196,7 +246,15 @@ const Home = () => {
 
             <motion.button
               className="border-none bg-transparent p-0 mt-16 cursor-none"
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ 
+                scale: 1.1,
+                rotate: 10,
+                transition: {
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 10
+                }
+              }}
               onClick={() => handleGuideNavigation('music')}
               onMouseEnter={() => {
                 setShowCursor(true);
@@ -219,34 +277,44 @@ const Home = () => {
                 }}
               />
             </motion.button>
-          </div>
-          <motion.button
-            className="border-none bg-transparent p-0 cursor-none"
-            whileHover={{ scale: 1.1 }}
-            onClick={() => handleGuideNavigation('snowboard')}
-            onMouseEnter={() => {
-              setShowCursor(true);
-              setHoverText("Snowboard");
-            }}
-            onMouseLeave={() => {
-              setShowCursor(false);
-              setHoverText("");
-            }}
-          >
-            <motion.img
-              src="/snowboard.png"
-              alt="Snowboard"
-              className="mt-16 lg:mt-28 lg:w-max lg:h-[100] object-contain"
-             
-      
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
+          </motion.div>
+          <motion.div variants={fadeInUp} className="relative">
+            <motion.button
+              className="border-none bg-transparent p-0 cursor-none"
+              whileHover={{ 
+                scale: 1.1,
+                rotate: -10,
+                transition: {
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 10
+                }
               }}
-            />
-          </motion.button>
-        </div>
+              onClick={() => handleGuideNavigation('snowboard')}
+              onMouseEnter={() => {
+                setShowCursor(true);
+                setHoverText("Snowboard");
+              }}
+              onMouseLeave={() => {
+                setShowCursor(false);
+                setHoverText("");
+              }}
+            >
+              <motion.img
+                src="/snowboard.png"
+                alt="Snowboard"
+                className="mt-16 lg:mt-28 lg:w-max lg:h-[100] object-contain"
+               
+      
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </div>
     </>
   );
@@ -258,12 +326,35 @@ const SocialMedia = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-8 relative mt-16 mb-16">
-      <h1 className="text-3xl font-semibold text-gray-400 text-center mb-8">
-        Connect
-      </h1>
+    <motion.div 
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="max-w-7xl mx-auto px-4 md:px-8 relative mt-16 mb-16 cursor-none"
+    >
+      <motion.div 
+        variants={fadeInUp}
+        className="w-full h-24 mt-8 mb-3"
+      >
+        <svg viewBox="0 0 500 100" className="w-full h-full">
+          <path
+            id="curve-connect"
+            d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"
+            fill="transparent"
+          />
+          <text className="fill-white" style={{ fontFamily: 'Gambarino' }}>
+            <textPath href="#curve-connect" startOffset="50%" textAnchor="middle" className="text-3xl md:text-3xl lg:text-3xl">
+              Connect
+            </textPath>
+          </text>
+        </svg>
+      </motion.div>
 
-      <div className="grid grid-cols-2 gap-6 max-w-md mx-auto">
+      <motion.div 
+        variants={staggerContainer}
+        className="grid grid-cols-2 gap-6 max-w-md mx-auto cursor-none"
+      >
         {[
           { 
             name: 'LinkedIn', 
@@ -316,178 +407,104 @@ const SocialMedia = () => {
               }}
             />
             <button
-              className="relative w-full bg-black border border-black p-4 text-center translate-y-[2px]transition-all duration-75 ease-out group-hover:translate-y-[-8px] group-hover:translate-x-[-8px] hover:scale-102 scale-100 group-hover:border-white group-hover:border-1"
+              className="cursor-none relative w-full bg-black border border-black p-4 text-center translate-y-[2px]transition-all duration-75 ease-out group-hover:translate-y-[-8px] group-hover:translate-x-[-8px] hover:scale-102 scale-100 group-hover:border-white group-hover:border-1"
               onClick={() => handleSocialNavigation(social.url)}
             >
-              <h2 className="text-xl font-bold text-white">
+              <h2 className="text-xl font-bold text-white" style={{ fontFamily: 'Gambarino' }}>
                 {social.name}
               </h2>
             </button>
           </motion.div>
         ))}
-      </div>
-    </div>
-  );
-};
-
-const Navbar = () => {
-  const [scrollState, setScrollState] = useState({
-    hasScrolled: false,
-    scrollProgress: 0
-  });
-
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          
-          setScrollState({
-            hasScrolled: currentScrollY > 50,
-            scrollProgress: Math.min((currentScrollY / maxScroll) * 100, 100)
-          });
-
-          ticking = false;
-        });
-
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        ${scrollState.hasScrolled 
-          ? 'bg-black/80 backdrop-blur-sm border-b border-white/10' 
-          : ' border-b-0'}
-      `}
-    >
-      {/* Progress bar */}
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/5">
-        <div 
-          className="h-full bg-gray-400 transition-all duration-300"
-          style={{ width: `${scrollState.scrollProgress}%` }}
-        />
-      </div>
-
-      {/* Existing navbar content */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-24">
-          {/* Left menu items */}
-          <div className="flex items-center gap-8">
-            <a
-              href="#guides"
-              className="text-gray-300 hover:text-white transition-colors duration-200 text-md font-medium"
-            >
-              Guides
-            </a>
-            <a
-              href="#designs"
-              className="text-gray-300 hover:text-white transition-colors duration-200 text-md font-medium"
-            >
-              Designs
-            </a>
-          </div>
-
-          {/* Logo/Title */}
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="flex flex-col items-center">
-              <h1 className="text-3xl font-bold text-white tracking-wider">
-                蔡
-              </h1>
-              <span className="text-s text-gray-300 tracking-widest mt-1">
-                CHAI
-              </span>
-            </div>
-          </div>
-
-          {/* Right menu items */}
-          <div className="flex items-center gap-8">
-            <a
-              href="#about"
-              className="text-gray-300 hover:text-white transition-colors duration-200 text-md font-medium"
-            >
-              About
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-300 hover:text-white transition-colors duration-200 text-md font-medium"
-            >
-              Contact
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
+      </motion.div>
+    </motion.div>
   );
 };
 
 const ProjectList = () => {
-  const [isHovering, setIsHovering] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const cursorSize = 20;
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePosition({ x: e.clientX, y: e.clientY });
-  };
+  // Define project configurations with both background and text hover colors
+  const projects = [
+    { 
+      name: 'Biru', 
+      bgHoverColor: 'rgb(59, 130, 246)',    // White bg
+      textHoverColor: 'rgb(255, 255, 255)'    // Blue text
+    },
+    { 
+      name: 'Pilly', 
+      bgHoverColor: '#ffffff',    // Dark gray bg
+      textHoverColor: '#000000'     // Pink text
+    },
+    { 
+      name: 'Indorder', 
+      bgHoverColor: '#2f2f2f',    // Dark gray bg
+      textHoverColor: '#F6F930'     // Pink text
+    },
+    { 
+      name: 'SLPR', 
+      bgHoverColor: '#d7fc01' ,    
+      textHoverColor: '#000000'     // Green text
+    },
+    { 
+      name: 'SmartBin', 
+      bgHoverColor: '#08B651',    // White bg
+      textHoverColor: '#E4FA84'     // Yellow text
+    }
+  ];
 
   return (
-    <div 
-      className="max-w-7xl mx-auto px-4 md:px-8 mt-32 cursor-none relative"
-      onMouseMove={handleMouseMove}
+    <motion.div 
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="w-[80vw] mx-auto cursor-none relative mt-32"
     >
-      <motion.div
-        className="fixed pointer-events-none z-[45] rounded-full"
-        style={{
-          width: cursorSize,
-          height: cursorSize,
-          backgroundColor: isHovering ? 'black' : 'rgba(255, 255, 255, 0.8)',
-        }}
-        animate={{
-          x: mousePosition.x - cursorSize/2,
-          y: mousePosition.y - cursorSize/2,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5
-        }}
-      />
-
-      <h2 className="text-6xl font-bold text-white mb-16">Projects</h2>
-      <div className="flex flex-col">
-        {[
-          'Biru',
-          'Indorder',
-          'Agung Graha',
-          'SmartBin'
-        ].map((project) => (
-          <div 
-            key={project}
-            className="group border-t border-white/20 relative origin-top cursor-none"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
+    
+      
+      <motion.div 
+        className="flex flex-col"
+        variants={staggerContainer}
+      >
+        {projects.map((project) => (
+          <motion.div 
+            key={project.name}
+            variants={fadeInUp}
+            className="group relative origin-top cursor-none w-full"
           >
-            <div className="transform-gpu group-hover:scale-[1.08] transition-all duration-300 ease-in-out">
-              <div className="absolute inset-0 bg-white w-0 group-hover:w-full transition-all duration-500 ease-in-out" />
-              <div className="relative py-8 flex justify-between items-center">
-                <h3 className="text-4xl font-bold text-white ml-6 group-hover:text-black transition-all duration-100 ease-in-out">
-                  {project}
+            <div className="transform-gpu group-hover:scale-[1.08] transition-all duration-300 ease-in-out border-b border-white/20 group-hover:border-opacity-0">
+              <div 
+                className="absolute inset-0 w-0 group-hover:w-full transition-all duration-500 ease-in-out"
+                style={{ backgroundColor: project.bgHoverColor }}
+              />
+              <div className="relative py-12 flex justify-between items-center pl-16 pr-16">
+                <h3 
+                  className={`font-bold transition-colors duration-100 ease-in-out text-white group-hover:text-[var(--hover-color)] ${
+                    project.name === 'SLPR' ? 'text-6xl' : 'text-5xl'
+                  }`}
+                  style={{ 
+                    '--hover-color': project.textHoverColor,
+                    fontFamily: project.name === 'SLPR' 
+                      ? 'BiggerDisplay' 
+                      : project.name === 'SmartBin'
+                      ? 'Chillax-Semibold'
+                      : project.name === 'Pilly'
+                      ? 'Nunito-Black'
+                      : 'inherit',
+                    letterSpacing: project.name === 'SLPR' ? '0.05em' : 'inherit'
+                  } as React.CSSProperties}
+                >
+                  {project.name}
                 </h3>
+                
                 <svg 
-                  className="w-10 h-10 text-white transform mr-4 group-hover:rotate-180 group-hover:text-black transition-transform duration-500 ease-in-out"
+                  className="w-12 h-12 text-white transform group-hover:rotate-180 transition-all duration-500 ease-in-out group-hover:text-[var(--hover-color)]"
                   xmlns="http://www.w3.org/2000/svg" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
+                  style={{
+                    '--hover-color': project.textHoverColor
+                  } as React.CSSProperties}
                 >
                   <path 
                     strokeLinecap="round" 
@@ -498,19 +515,16 @@ const ProjectList = () => {
                 </svg>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-        <div className="border-t border-white/20" />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
 export default function Page() {
   return (
-    <main className="min-h-screen cursor-none">
-      <Navbar />
-    
+    <main className="min-h-screen">
       <Home />
       <ProjectList />
       <SocialMedia />

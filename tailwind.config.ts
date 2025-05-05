@@ -15,6 +15,9 @@ export default {
       gridTemplateColumns: {
         'auto-fit-200': 'repeat(auto-fit, minmax(200px, 1fr))',
       },
+      fontFamily: {
+        'bigger': ['BiggerDisplay', 'sans-serif'],
+      },
     },
   },
   plugins: [],

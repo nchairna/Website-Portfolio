@@ -4,7 +4,52 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+
 body {
   background: black;
   font-family: 'Outfit', sans-serif;
 }
+
+@font-face {
+  font-family: 'BiggerDisplay';
+  src: url('/fonts/BiggerDisplay.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Chillax-Semibold';
+  src: url('/fonts/Chillax-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} 
+
+@font-face {
+  font-family: 'Chillax-Bold';
+  src: url('/fonts/Chillax-Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} 
+
+@font-face {
+  font-family: 'Nunito-Black';
+  src: url('/fonts/Nunito-Black.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} 
+
+@font-face {
+  font-family: 'Gambarino-Regular';
+  src: url('/fonts/Gambarino-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} 
+
+* {
+  cursor: none !important;
+} 

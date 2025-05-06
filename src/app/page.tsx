@@ -158,7 +158,7 @@ const Home = () => {
               fill="transparent"
             />
             <text className="fill-white" style={{ fontFamily: 'Gambarino' }}>
-              <textPath href="#curve" startOffset="50%" textAnchor="middle" className="text-3xl md:text-3xl lg:text-3xl">
+              <textPath href="#curve" startOffset="50%" textAnchor="middle" className="text-5xl md:text-3xl lg:text-3xl">
                 Chai&apos;s Portfolio
               </textPath>
             </text>
@@ -358,12 +358,12 @@ const SocialMedia = () => {
         {[
           { 
             name: 'LinkedIn', 
-            url: 'https://www.linkedin.com/in/your-profile',
+            url: 'https://www.linkedin.com/in/Nicholas-Chairnando',
             icon: '/linkedin-icon.png' // Add your LinkedIn icon
           },
           { 
             name: 'Instagram', 
-            url: 'https://www.instagram.com/your-profile',
+            url: 'https://www.instagram.com/archaiived',
             icon: '/instagram-icon.png' // Add your Instagram icon
           }
         ].map((social, index) => (
@@ -476,10 +476,10 @@ const ProjectList = () => {
                 className="absolute inset-0 w-0 group-hover:w-full transition-all duration-500 ease-in-out"
                 style={{ backgroundColor: project.bgHoverColor }}
               />
-              <div className="relative py-12 flex justify-between items-center pl-16 pr-16">
+              <div className="relative py-12 flex justify-between items-center pl-4 pr-4 md:pl-16 md:pr-16">
                 <h3 
-                  className={`font-bold transition-colors duration-100 ease-in-out text-white group-hover:text-[var(--hover-color)] ${
-                    project.name === 'SLPR' ? 'text-6xl' : 'text-5xl'
+                  className={`font-bold transition-colors duration-100 ease-in-out text-white group-hover:text-[var(--hover-color)] text-3xl md:text-5xl w-full text-center md:text-left ${
+                    project.name === 'SLPR' ? 'md:text-6xl' : 'md:text-5xl'
                   }`}
                   style={{ 
                     '--hover-color': project.textHoverColor,
@@ -497,7 +497,7 @@ const ProjectList = () => {
                 </h3>
                 
                 <svg 
-                  className="w-12 h-12 text-white transform group-hover:rotate-180 transition-all duration-500 ease-in-out group-hover:text-[var(--hover-color)]"
+                  className="w-12 h-12 text-white transform group-hover:rotate-180 transition-all duration-500 ease-in-out group-hover:text-[var(--hover-color)] hidden md:block"
                   xmlns="http://www.w3.org/2000/svg" 
                   fill="none" 
                   viewBox="0 0 24 24" 

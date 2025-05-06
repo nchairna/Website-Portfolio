@@ -74,7 +74,7 @@ export default function NotFound() {
         <p 
           className="text-white text-xl md:text-3xl mt-4 font-['Gambarino'] text-center px-4"
         >
-          chai hasn't worked on this page yet
+          chai hasn&apos;t worked on this page yet
         </p>
       </div>
     </>

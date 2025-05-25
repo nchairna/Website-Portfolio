@@ -56,7 +56,7 @@ export default function NotFound() {
           >
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          <span className="font-['Gambarino'] text-lg">Go Back</span>
+          <span className="font-['Gambarino'] text-lg">Back</span>
         </motion.button>
 
         <h1 

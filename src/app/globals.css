@@ -50,6 +50,11 @@ body {
   font-display: swap;
 } 
 
-* {
-  cursor: none !important;
+@font-face {
+  font-family: 'CabinetGrotesk-Black';
+  src: url('/fonts/CabinetGrotesk-Black.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 } 
+

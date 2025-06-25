@@ -27,12 +27,12 @@ const staggerContainer = {
 const Header = () => {
   return (
     <div className="relative w-full">
-      <nav className="w-full px-4 md:px-8 pt-4 md:pt-8">
-        <ul className="flex justify-center gap-8 md:gap-20 font-['Outfit'] font-semibold text-white text-lg md:text-2xl">
+      <nav className="w-full px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8">
+        <ul className="flex justify-center gap-6 sm:gap-8 md:gap-20 font-['Outfit'] font-semibold text-white text-base sm:text-lg md:text-2xl">
           <li>
             <Link 
               href="/projects" 
-              className="relative hover:opacity-100 transition-opacity after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-white after:left-0 after:bottom-[-4px] md:after:bottom-[-8px] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
+              className="relative hover:opacity-100 transition-opacity after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-white after:left-0 after:bottom-[-4px] sm:after:bottom-[-6px] md:after:bottom-[-8px] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
             >
               projects
             </Link>
@@ -40,7 +40,7 @@ const Header = () => {
           <li>
             <Link 
               href="/contact" 
-              className="relative hover:opacity-100 transition-opacity after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-white after:left-0 after:bottom-[-4px] md:after:bottom-[-8px] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
+              className="relative hover:opacity-100 transition-opacity after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-white after:left-0 after:bottom-[-4px] sm:after:bottom-[-6px] md:after:bottom-[-8px] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
             >
               contact
             </Link>
@@ -48,7 +48,7 @@ const Header = () => {
           <li>
             <Link 
               href="/resume" 
-              className="relative hover:opacity-100 transition-opacity after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-white after:left-0 after:bottom-[-4px] md:after:bottom-[-8px] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
+              className="relative hover:opacity-100 transition-opacity after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-white after:left-0 after:bottom-[-4px] sm:after:bottom-[-6px] md:after:bottom-[-8px] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
             >
               resume
             </Link>
@@ -56,9 +56,9 @@ const Header = () => {
         </ul>
       </nav>
 
-      <div className="h-[40vh] md:h-[50vh] flex items-center justify-center">
+      <div className="h-[30vh] sm:h-[40vh] md:h-[50vh] flex items-center justify-center">
         <motion.h1 
-          className="font-['CabinetGrotesk-Black'] text-white text-[12vw] md:text-[16vw] leading-none"
+          className="font-['CabinetGrotesk-Black'] text-white text-[15vw] sm:text-[12vw] md:text-[16vw] leading-none"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -142,10 +142,10 @@ const ProjectList = () => {
                   className="absolute inset-0 w-0 group-hover:w-full transition-all duration-500 ease-in-out"
                   style={{ backgroundColor: project.bgHoverColor }}
                 />
-                <div className="relative py-8 md:py-12 flex justify-between items-center pl-4 pr-4 md:pl-16 md:pr-16">
+                <div className="relative py-10 sm:py-10 md:py-12 flex justify-between items-center pl-4 pr-4 md:pl-16 md:pr-16">
                   <h3 
-                    className={`font-bold transition-colors duration-100 ease-in-out text-white group-hover:text-[var(--hover-color)] text-2xl md:text-5xl w-full text-center md:text-left ${
-                      project.name === 'SLPR' ? 'md:text-6xl' : 'md:text-5xl'
+                    className={`font-bold transition-colors duration-100 ease-in-out text-white group-hover:text-[var(--hover-color)] text-4xl sm:text-3xl md:text-5xl w-full text-center md:text-left ${
+                      project.name === 'SLPR' ? 'sm:text-5xl md:text-6xl' : 'sm:text-3xl md:text-5xl'
                     }`}
                     style={{ 
                       '--hover-color': project.textHoverColor,
@@ -161,7 +161,7 @@ const ProjectList = () => {
                   </h3>
                   
                   <svg 
-                    className="w-8 h-8 md:w-12 md:h-12 text-white transform group-hover:rotate-180 transition-all duration-500 ease-in-out group-hover:text-[var(--hover-color)] hidden md:block"
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white transform group-hover:rotate-180 transition-all duration-500 ease-in-out group-hover:text-[var(--hover-color)] hidden md:block"
                     xmlns="http://www.w3.org/2000/svg" 
                     fill="none" 
                     viewBox="0 0 24 24" 

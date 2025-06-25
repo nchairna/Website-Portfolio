@@ -58,3 +58,35 @@ body {
   font-display: swap;
 } 
 
+@font-face {
+  font-family: 'PPObjectSans-Regular';
+  src: url('/fonts/PPObjectSans-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PPObjectSans-Heavy';
+  src: url('/fonts/PPObjectSans-Heavy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PPObjectSans-HeavySlanted';
+  src: url('/fonts/PPObjectSans-HeavySlanted.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PPObjectSans-Slanted';
+  src: url('/fonts/PPObjectSans-Slanted.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+} 
+

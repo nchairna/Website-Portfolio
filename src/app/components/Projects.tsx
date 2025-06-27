@@ -9,7 +9,7 @@ const Projects = () => {
       title: "Biru",
       description: "Matching housemaids and households in Indonesia",
       award: "Beall-Butterworth 3rd Place",
-      skills: ["Mobile", "Matching", "Java"],
+      skills: ["Mobile App", "Market Research", "Prototyping"],
       link: "/projects/biru",
       size: "large" // Top left - larger box
     },
@@ -18,7 +18,7 @@ const Projects = () => {
       title: "Bookin",
       description: "Bookings made simpler.",
       award: null,
-      skills: ["next.js", "react"],
+      skills: ["Fullstack", "React"],
       link: "/projects/bookin",
       size: "small" // Bottom left - smaller box
     },
@@ -27,7 +27,7 @@ const Projects = () => {
       title: "Pilly",
       description: "A companion that helps you re-imagine how you take your pills.",
       award: "Designathon 2nd Place",
-      skills: ["next.js", "react", "Java"],
+      skills: ["Figma", "UserTesting", "Pitching"],
       link: "/projects/pilly",
       size: "tall" // Right side - tall box
     }

@@ -40,7 +40,7 @@ const Skills = () => {
 
   return (
     <section className="bg-black text-white px-6 sm:px-12 md:px-24 py-16 w-full">
-      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-16">
+      <div className="flex flex-col lg:flex-row items-center lg:items-start  gap-12 lg:gap-16">
         {/* Left: Description Text */}
         <motion.div 
           className="lg:w-1/3"
@@ -49,7 +49,7 @@ const Skills = () => {
           viewport={{ once: true, margin: "-100px" }}
           variants={textVariants}
         >
-          <h2 className="font-['PPObjectSans-Regular'] text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+          <h2 className="font-['PPObjectSans-Regular'] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-center lg:text-left">
             creating<br />
             products with<br />
             skills of
@@ -58,7 +58,7 @@ const Skills = () => {
         
         {/* Right: Skills Grid */}
         <div className="lg:w-2/3">
-          <div className="flex flex-wrap gap-2 sm:gap-4 justify-end">
+          <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center lg:justify-end">
             {skills.map((skill, index) => {
               const isHighlighted = highlightedSkills.includes(skill);
               return (
@@ -71,7 +71,7 @@ const Skills = () => {
                   variants={buttonVariants}
                 >
                   <Button 
-                    className={`mb-2 ${isHighlighted ? '!bg-white !text-black hover:!bg-transparent hover:!text-white' : ''}`}
+                    className={`mb-2 text-sm sm:text-base ${isHighlighted ? '!bg-white !text-black hover:!bg-transparent hover:!text-white' : ''}`}
                   >
                     {skill}
                   </Button>

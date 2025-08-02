@@ -13,7 +13,7 @@ const Button = ({ children, onClick, href, className = "" }: ButtonProps) => {
     px-7 py-3
     border-2 border-white
     rounded-full
-    bg-transparent
+    bg-black
     text-white
     font-['PPObjectSans-Regular']
     text-base sm:text-lg md:text-xl
